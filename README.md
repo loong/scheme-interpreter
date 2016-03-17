@@ -1,4 +1,20 @@
 # Scheme Interpreter
+Implementation of a basic *turing-complete* Scheme interpretation, complying to these specs: https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-4.html
+
+To reach turing-completness, C++ is used as bootstrap medium. After I finished creating my 'own scheme', I continued to extend the language with it's own syntax, which can be found in `library.scm`
+
+## How to build
+### Pre-requisite
+Make sure you have all dependencies and build tools installed to compile and link a C++. If not you can install in Debian / Ubuntu it with:
+```
+sudo apt-get install build-essential
+```
+### Build and run
+Simply compile with `make` which results in an executable `main` file
+```
+make
+./run
+```
 
 ## General remarks
   * Every operation is seen as a function. eval() uses Cell::apply() which call the corresponding (overwritten) method of either 
