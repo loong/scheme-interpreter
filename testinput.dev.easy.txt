@@ -1,0 +1,33 @@
+(<)
+(< 1.0)
+(< (+ 1 2.0))
+(< 1 2 3 3.5 4)
+(< 4 3 2.5 2 1)
+(not 0)
+(not (- 3.2 3.2))
+(not 1)
+(not 4.2)
+(not (< 7 8))
+(not (not 0))
+(not (quote ()))
+(not (quote (1 2)))
+(cons (quote +) (quote (1 2)))
+(eval (cons (quote +) (quote (1 2))))
+(quote (cons (quote +) (quote (1 2))))
+(eval (quote (cons (quote +) (quote (1 2)))))
+(eval (eval (quote (cons (quote +) (quote (1 2))))))
+(define a 3)
+a
+(define asquared (* a a))
+asquared
+(define b 4.0)
+b
+(define csquared (+ asquared (* b b)))
+csquared
+(+ csquared 1)
+csquared
+(define foo (quote hello))
+foo
+(eval a)
+(print (+ 1 2))
+(print (quote (+ 1 2)))

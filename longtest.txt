@@ -1,0 +1,7 @@
+(+ 18 (factorial 4))
+(> 2 5)
+(define multiply (lambda (x y z) (* x y z)))
+(multiply 1 2 3)
+(apply multiply (quote (2 3 4)))
+(define apply-to-2-3-4 (lambda (f) (apply f (quote (2 3 4)))))
+(apply-to-2-3-4 multiply)
