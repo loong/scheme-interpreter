@@ -8,10 +8,13 @@
 #include "functions.hpp"
 #include "cons.hpp"
 #include "eval.hpp"
+#include "parse.hpp"
 
 #include "DefinitionManager.hpp"
 
 #include <cmath>
+#include <ctime>
+#include <cstring>
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Helpers
@@ -255,7 +258,7 @@ Cell* not_func(const FunctionCell* func, Cell* args) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Cell* print_func(const FunctionCell* func, Cell* args) {
+Cell* print_func(const FunctionCell* func, Cell* args) { 
   Cell* argument_cell = single_argument_eval(func, args);
 
   cout << *argument_cell;
@@ -345,4 +348,85 @@ Cell* let_func(const FunctionCell* func, Cell* args) {
     
     throw;
   }  
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Cell* rand_func(const FunctionCell* func, Cell* args) {
+  if (ConsCell::get_list_size(args) != 2) {
+    throw runtime_error("let need exactly 2 arguments");
+  }
+
+   int num1 = get_int(eval(car(args)));
+   int num2 = get_int(eval(car(cdr(args))));
+   int res = rand() % abs(num1 - num2);
+
+   if (num1 < num2) {
+     res += num1;
+   }
+   else {
+     res += num2;
+   }
+
+   return make_int(res);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Cell* str_func(const FunctionCell* func, Cell* args) { 
+  if (!nullp(cdr(args))) {
+    throw runtime_error("str expects exactly 1 argument");
+  }
+  
+  Cell* argument_cell = eval(car(args));
+
+  stringstream ss;
+  argument_cell->print(ss);
+
+  return make_symbol(ss.str().c_str());
+}
+
+Cell* substr_func(const FunctionCell* func, Cell* args) {
+  if (ConsCell::get_list_size(args) != 3) {
+    throw runtime_error("substr needs exactly 3 arguments");
+  }
+
+  Cell* symbolCell = eval(car(args));
+  Cell* startCell = eval(car(cdr(args)));
+  Cell* endCell = eval(car(cdr(cdr(args))));
+  
+  int start = get_int(startCell);
+  int end   = get_int(endCell);
+
+  string sub = get_symbol(symbolCell).substr(start, end);
+
+  return make_symbol(sub.c_str());
+}
+
+Cell* appstr_func(const FunctionCell* func, Cell* args) {
+  if (ConsCell::get_list_size(args) != 2) {
+    throw runtime_error("substr needs exactly 2 arguments");
+  }
+
+  string s1 = get_symbol(eval(car(args)));
+  string s2 = get_symbol(eval(car(cdr(args))));
+
+  return make_symbol(s1.append(s2).c_str());
+}
+
+
+Cell* parse_func(const FunctionCell* func, Cell* args) {
+  Cell* argument_cell = single_argument_eval(func, args);
+  
+  Cell* root = parse(get_symbol(argument_cell));
+  
+  return root;
+}
+
+Cell* parse_eval_func(const FunctionCell* func, Cell* args) {
+  Cell* argument_cell = single_argument_eval(func, args);
+  
+  Cell* root = parse(get_symbol(argument_cell));
+  
+  return eval(root);
 }

@@ -138,7 +138,7 @@ void DoubleCell::print(std::ostream& os) const {
 SymbolCell::SymbolCell(const char* const s) {
   //Make a deepcopy of the parameter value to ensure that the user's variable
   //will be untouched
-  content_m = new char[strlen(s)];
+  content_m = new char[strlen(s)+1];
   strcpy(content_m, s);
 }
 

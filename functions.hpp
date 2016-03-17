@@ -140,4 +140,35 @@ Cell* apply_func(const FunctionCell* func, Cell* args);
  */
 Cell* let_func(const FunctionCell* func, Cell* args);
 
+/**
+ * \brief used for random variables, takes the range of random values as a range
+ */
+Cell* rand_func(const FunctionCell* func, Cell* args);
+
+/**
+ * \brief converts any Cell type to symbol type using print method
+ */
+Cell* str_func(const FunctionCell* func, Cell* args);
+
+/**
+ * \brief substring for symbol cells, takes symbol and a range (start
+ *        and end of substr)
+ */
+Cell* substr_func(const FunctionCell* func, Cell* args);
+
+/**
+ * \brief appends symbols, takes two symbols
+ */
+Cell* appstr_func(const FunctionCell* func, Cell* args);
+
+/**
+ * \brief parses s-expression inside a symbol cell and evaluates it
+ */
+Cell* parse_func(const FunctionCell* func, Cell* args);
+
+/**
+ * \brief parses s-expression inside a symbol cell and evaluates it
+ */
+Cell* parse_eval_func(const FunctionCell* func, Cell* args);
+
 #endif

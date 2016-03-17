@@ -16,7 +16,17 @@ Cell* eval(Cell* const c) {
   /// this approach gets rid of loads of if-then checks
   if (!listp(c)) {
     if (symbolp(c)) {
-      	return c->get_definition();
+      string sym = get_symbol(c);
+
+      if (FunctionCell::is_function(sym)) {
+	return new FunctionCell(sym.c_str());
+      }
+      
+      if (ArithmeticCell::is_arithmetic(sym)) {
+	return new ArithmeticCell(sym.c_str());
+      }
+      
+      return c->get_definition();
     }
     return c;
   }

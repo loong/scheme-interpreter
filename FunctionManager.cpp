@@ -3,6 +3,8 @@
 
 #include "cons.hpp"
 
+#include <ctime>
+
 /// define static members
 map<string, FunctionManager::func> FunctionManager::func_defs_m;
 FunctionManager* FunctionManager::instance = NULL;
@@ -26,9 +28,18 @@ FunctionManager::FunctionManager() {
   add_function("not",     &not_func);
   add_function("print",   &print_func);
   add_function("eval",    &eval_func);
+  add_function("parse",   &parse_func);
+  add_function("parse-eval", &parse_eval_func);
   add_function("lambda",  &lambda_func);
   add_function("apply",   &apply_func);
   add_function("let",     &let_func);
+
+  add_function("rand",    &rand_func);
+  srand(time(0));                            // seed for rand function
+
+  add_function("str",     &str_func);
+  add_function("substr",  &substr_func);
+  add_function("appstr",  &appstr_func);
 
   /// CSI compatability
   add_function("int?",    &intp_func);
@@ -36,7 +47,6 @@ FunctionManager::FunctionManager() {
   add_function("symbol?", &symbolp_func);
   add_function("null?",   &nullp_func);
   add_function("list?",   &listp_func);
-  add_function("'",       &quote_func);
 }
 
 /// Singleton Pattern
