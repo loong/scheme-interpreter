@@ -1,7 +1,13 @@
-# Scheme Interpreter
-Implementation of a basic *turing-complete* Scheme interpretation, complying to these specs: https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-4.html
+MicroScheme - A Scheme Interpreter
+==================================
+
+Implementation of a basic *turing-complete* Scheme interpretation, complying to [these specs](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-4.html).
 
 To reach turing-completness, C++ is used as bootstrap medium. After I finished creating my 'own scheme', I continued to extend the language with it's own syntax, which can be found in `library.scm`
+
+This project was created during the Honors course for OOP and Data Structures (COMP 2012H) at the Hong Kong University of Science and Technology, instructed by [Prof. Dekai Wu](http://www.cse.ust.hk/~dekai/) and Karteek Addanki.
+
+The old (and unclean) project from the course with full commit history [can be found on bitbucket](https://bitbucket.org/mindworker/microscheme/overview).
 
 ## How to build
 ### Pre-requisite
@@ -17,7 +23,7 @@ make
 ```
 
 ## Bonus 'Game'
-I created a Labyrinth generator in my own scheme implementation. The code can be found in `library.scm` and will be run once on startup. You can run it manually by executing this in the scheme shell:
+A Labyrinth generator is implemented with this scheme implementation. The code can be found in `library.scm` and runs once on startup. You can run it manually by executing this in the scheme shell:
 ```
 (example-labyrinth)
 ```
